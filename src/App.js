@@ -4,6 +4,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 // componets
 import AgregarCita from './components/AgregarCita';
+import ListadoCitas from './components/ListadoCitas';
 
 function App() {
   return (
@@ -13,12 +14,12 @@ function App() {
           <h1 className="text-center">Administrador de pacientes de Veterinaria</h1>
         </header>
 
-        <div className="row my-5">
+        <div className="row my-4">
           <div className="col-md-6">
             <AgregarCita/>
           </div>
           <div className="col-md-6">
-            Listado Aquí
+            <ListadoCitas/>
           </div>
         </div>
       </div>

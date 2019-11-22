@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { agregarCitaAction } from '../actions/citasActions'
+import { validarFormularioAction } from '../actions/validarActions'
 import uuid from 'uuid/v4'
 
 const AgregarCita = () => {
@@ -15,15 +16,25 @@ const AgregarCita = () => {
   // Dispatch para ejecutar nuestras acciones
   const dispatch = useDispatch()
   const agregarNuevaCita = cita => dispatch(agregarCitaAction(cita))
+  const validarFormulario = estado => dispatch(validarFormularioAction(estado))
+
+  // Accedemos al state
+  const error = useSelector( (state) => state.error)
 
   const nuevaCita = e => {
     e.preventDefault()
 
     // validar
+    if(mascota.trim() === "" || duenio.trim() === "" || fecha.trim() === "" || hora.trim() === "" || sintomas.trim() === ""){
+      validarFormulario(true)
+      return
+    }
 
     // crear la nueva cita. #1
     // Para crear una nueva cita debemos de crear una nueva pieza llamada acciones. Para ello creamos una 
     // nueva carpeta a la que llamaremos actions. dentro de esta carpeta creamos un archivo llamdo citasActions.js
+    validarFormulario(false)
+
     agregarNuevaCita({
       id: uuid(),
       mascota,
@@ -42,7 +53,7 @@ const AgregarCita = () => {
   }
 
   return (
-    <div className="card mt-5">
+    <div className="card">
       <div className="card-body">
         <h2 className="card-title text-center mb-5">Agrega las citas aqui</h2>
         <form
@@ -108,6 +119,8 @@ const AgregarCita = () => {
             </div>
           </div>
         </form>
+
+        {error.error ? <div className="alert alert-danger text-center p2">Todos los campos son obligatorios</div> : null }
       </div>
     </div>
   );

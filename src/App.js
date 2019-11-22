@@ -2,6 +2,8 @@ import React from 'react';
 // Redux
 import store from './store'
 import { Provider } from 'react-redux'
+// componets
+import AgregarCita from './components/AgregarCita';
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
 
         <div className="row my-5">
           <div className="col-md-6">
-            Formulario Aquí
+            <AgregarCita/>
           </div>
           <div className="col-md-6">
             Listado Aquí
